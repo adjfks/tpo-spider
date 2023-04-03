@@ -16,7 +16,8 @@ function work(x, y) {
 
   axios.get('https://sh.xhd.cn/toefl/tpo/').then(async res => {
     const $ = cheerio.load(res.data)
-    const links = $('.fud_rcon [title^="TPO听力"]')
+    // const links = $('.fud_rcon [title^="TPO听力"]')
+    const links = $('.fud_rcon [href^="/toefl/tpotingli/"]')
     for (let i = 0; i < links.length; i++) {
       const attr = links[i].attribs
       pages.push({
@@ -43,8 +44,8 @@ function work(x, y) {
   async function getEachPageStr(page) {
     let str = ''
     const reg = /(?<=TPO听力)[0-9]{1,2}(?=文本)/
-    const index = reg.exec(page.title)[0]
-    str += `Official ${index}\r\n`
+    const index = reg.exec(page.title)?.[0]
+    str += `Official ${index || 2}\r\n`
 
     await axios.get(`https://sh.xhd.cn${page.href}`).then(res => {
       const $ = cheerio.load(res.data)

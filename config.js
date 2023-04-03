@@ -1,7 +1,7 @@
 const config = {
   // 获取文本配置
   text: {
-    number: 1 // 第几篇official，支持1-53
+    number: 2 // 第几篇official，支持1-53
   },
   // 统计词频配置
   count: {
